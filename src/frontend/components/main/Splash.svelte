@@ -53,7 +53,7 @@
 </script>
 
 <Center class="context splash">
-    <img class="logo" src="./logo.png" alt="Praisecast logo" draggable="false" />
+    <img class="logo" src="https://i.ibb.co/B2sMXcW4/logo.png" alt="Praisecast logo" draggable="false" />
     <h1>Praisecast</h1>
     <p style="opacity: 0.7;">v{$version}</p>
     {#if $special.splashText}
