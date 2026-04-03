@@ -166,7 +166,7 @@ export abstract class ContentProvider<TScope extends string = string, TAuthData 
             <title>Success!</title>
         </head>
         <body style="padding: 80px;background: #242832;color: #f0f0ff;font-family: system-ui;font-size: 1.2em;">
-            <h1 style="color: #f0008c;">Success!</h1>
+            <h1 style="color: #ba2b38;">Success!</h1>
             <p>You can close this page</p>
         </body>`
     }

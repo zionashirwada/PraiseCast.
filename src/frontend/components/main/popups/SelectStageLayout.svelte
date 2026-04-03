@@ -70,8 +70,8 @@
         width: 25%;
         cursor: pointer;
     }
-    .stageLayout:focus {
-        outline: 2px solid var(--secondary);
+    .stageLayout:focus-visible {
+        outline: 2px solid var(--secondary) !important;
         outline-offset: 2px;
     }
 </style>
