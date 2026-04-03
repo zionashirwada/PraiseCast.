@@ -1,9 +1,9 @@
 <script lang="ts">
     import { onMount } from "svelte"
-    // import VirtualList from "@sveltejs/svelte-virtual-list"
-    // import VirtualList from "./VirtualList2.svelte"
+    import { Main } from "../../../../types/IPC/Main"
     import type { ShowList } from "../../../../types/Show"
     import { activeEdit, activeFocus, activePopup, activeProfile, activeProject, activeShow, activeTagFilter, categories, drawer, focusedArea, focusMode, labelsDisabled, shows, sorted, sortedShowsList } from "../../../stores"
+    import { sendMain } from "../../../IPC/main"
     import { translateText } from "../../../utils/language"
     import { getAccess } from "../../../utils/profile"
     import { formatSearch, isRefinement, showSearch, tokenize } from "../../../utils/search"
@@ -28,38 +28,29 @@
     $: formattedSearch = formatSearch(searchValue)
     $: showsSorted = $sortedShowsList
 
-    // // don't update unless it's changed
-    // let updatedSorted: typeof showsSorted = []
-    // $: if (showsSorted) updateSorted()
-    // function updateSorted() {
-    //     if (JSON.stringify(updateSorted) !== JSON.stringify(updatedSorted)) updatedSorted = clone(showsSorted)
-    // }
-
     $: profile = $activeProfile ? getAccess("shows") : {}
     $: readOnly = profile.global === "read"
+    $: activeCategory = active ? $categories[active] : null
+    $: isPresentationCategory = active === "presentation" || activeCategory?.icon === "presentation" || activeCategory?.name === "category.presentation"
 
     let filteredShows: ShowList[] = []
     let filteredStored: ShowList[] = []
     $: filteredStored = filteredShows =
         active === "all"
             ? showsSorted.filter((a) => !$categories[a?.category || ""]?.isArchive && profile[a?.category || ""] !== "none")
-            : // : active === "number" ? sortByNameAndNumber(showsSorted.filter((a) => a.quickAccess?.number), "asc")
-              active === "locked"
+            : active === "locked"
               ? showsSorted.filter((a) => a.locked)
               : showsSorted.filter((s) => profile[s?.category || ""] !== "none" && (active === s.category || (active === "unlabeled" && (s.category === null || !$categories[s.category]))))
 
     export let firstMatch: null | any = null
     let previousSearchTokens: string[] = []
     $: if (active || filteredStored) previousSearchTokens = []
-    // $: if (active || filteredStored) previousFilteredShows = clone(filteredStored)
     let previousFilteredShows: any[] = clone(filteredStored)
 
     $: drawerIsClosed = $drawer.height <= 40
     let shouldUpdate = false
-    // update when drawer is opened if it has changes
     $: if (shouldUpdate && !drawerIsClosed) search()
 
-    // reduce lag by only refreshing full list when not typing for 100 ms
     let isTyping: NodeJS.Timeout | null = null
     $: largeList = filteredStored.length > 300
     $: if (searchValue && largeList) typing()
@@ -71,13 +62,10 @@
         }, 100)
     }
 
-    // let scrolledToTop = ""
     let createFromSearch = false
     $: if (formattedSearch !== undefined || filteredStored || $activeTagFilter) search()
     function search() {
         if (isTyping) return
-        // don't update if drawer is closed
-        // updates to this lags the editor when moving/resizing items, if many shows in list
         if (drawerIsClosed) {
             shouldUpdate = true
             return
@@ -101,7 +89,6 @@
             previousFilteredShows = clone(filteredShows)
             previousSearchTokens = currentTokens
 
-            // if no title matches
             if (active === "all" && !showLoading && searchValue.length > 5 && (firstMatch?.originalMatch || 0) < 70) {
                 firstMatch = "SEARCH_CREATE"
                 createFromSearch = true
@@ -109,10 +96,7 @@
                 createFromSearch = false
             }
 
-            // scroll to top
             setTimeout(() => document.querySelector("svelte-virtual-list-viewport")?.scrollTo(0, 0))
-            // if (scrolledToTop !== searchValue)
-            // scrolledToTop = searchValue
         } else {
             filteredShows = filterByTags(clone(filteredStored), $activeTagFilter)
             firstMatch = null
@@ -139,7 +123,6 @@
     let showLoading = false
     function keydown(e: KeyboardEvent) {
         if (e.target?.closest(".drawer_search")) {
-            // get preview of shows
             if (e.key === "ArrowDown" || e.key === "ArrowUp") {
                 e.preventDefault()
                 createFromSearch = false
@@ -184,7 +167,6 @@
     $: showWithNumber = filteredShows.some((a) => a.quickAccess?.number)
     $: sortType = $sorted.shows?.type || "name"
     $: modifiedType = ["modified", "created", "used"].includes(sortType.replace("_old", "")) ? sortType.replace("_old", "") : "modified"
-    // All sortable columns share the same metadata so the UI + store stay in sync
     $: sortHeaders = [{ id: "name", style: "flex: 1;", label: translateText("show.name"), asc: "name", desc: "name_des", default: "asc" }, ...(showWithNumber ? [{ id: "number", style: "min-width: var(--number-width);", label: translateText("meta.number"), asc: "number", desc: "number_des", default: "asc" }] : []), { id: "modified", style: "min-width: var(--modified-width);", label: translateText(`info.${modifiedType}`), asc: `${modifiedType}_old`, desc: modifiedType, default: "desc" }]
 
     function toggleSort(columnId: string) {
@@ -218,13 +200,6 @@
         }
     }
 
-    // let listElem: HTMLElement | null = null
-    // let scrollElem: HTMLElement | null = null
-    // $: if (listElem && active) setTimeout(updateScrollElem)
-    // function updateScrollElem() {
-    //     scrollElem = listElem?.querySelector("svelte-virtual-list-viewport") || null
-    // }
-
     $: showWithNonExistentCategory = active === "unlabeled" && filteredStored.some((s) => s.category)
     function createNonExistentCategories() {
         const nonexistentCategories = [...new Set(filteredStored.map((s) => s.category))] as string[]
@@ -244,17 +219,19 @@
         searchInput?.addEventListener("focus", () => (activeIsSearch = true))
         searchInput?.addEventListener("blur", () => (activeIsSearch = false))
     })
+
+    function importPowerPoint() {
+        sendMain(Main.IMPORT, { channel: "powerpoint", format: { name: "PowerPoint", extensions: ["ppt", "pptx"] } })
+    }
 </script>
 
 <svelte:window on:keydown={keydown} />
 
 <Autoscroll style="overflow-y: auto;flex: 1;">
-    <!-- bind:this={listElem} -->
     <div class="column {readOnly ? '' : 'context #drawer_show'}" on:mouseup={() => focusedArea.set("show_drawer")}>
         {#if filteredShows.length}
             {#if createFromSearch && searchValue.length && typeof searchValue === "string" && activeIsSearch}
                 <div class="warning">
-                    <!-- role="none" on:click={createNew} -->
                     <p style="padding: 6px 8px;"><T id="show.enter_create" />: <span style="color: var(--secondary);font-weight: bold;">{searchValue[0]?.toUpperCase() + searchValue.slice(1)}</span></p>
                 </div>
             {/if}
@@ -275,7 +252,6 @@
                 {/each}
             </div>
 
-            <!-- reload list when changing category -->
             {#key active}
                 <VirtualList items={filteredShows} let:item={show} activeIndex={searchValue.length ? -1 : filteredShows.findIndex((a) => a.id === $activeShow?.id)}>
                     <SelectElem id="show_drawer" data={{ id: show.id }} shiftRange={filteredShows} draggable>
@@ -304,6 +280,13 @@
 {:else if active === "all" && !searchValue && filteredShows.length < 20}
     <FloatingInputs side="left" onlyOne>
         <MaterialButton variant="outlined" title="actions.import [Ctrl+I]" on:click={() => activePopup.set("import")}>
+            <Icon id="import" />
+            <T id="actions.import" />
+        </MaterialButton>
+    </FloatingInputs>
+{:else if isPresentationCategory && !searchValue}
+    <FloatingInputs side="left" onlyOne>
+        <MaterialButton variant="outlined" title="actions.import" on:click={importPowerPoint}>
             <Icon id="import" />
             <T id="actions.import" />
         </MaterialButton>
@@ -340,19 +323,11 @@
         padding-bottom: 60px;
     }
 
-    /* THIS don't work with virtual list */
-    /* .column :global(svelte-virtual-list-contents:nth-child(even) button) {
-        background-color: var(--primary-darkest);
-    } */
-
-    /* SORT HEADER */
-
     .sort-header {
         display: flex;
         height: 28px;
         border-radius: 4px;
         background-color: var(--primary-darker);
-        /* box-shadow: 0 3px 8px rgb(0 0 0 / 0.2); */
         border-bottom: 1px solid var(--primary-lighter);
     }
 
@@ -360,9 +335,11 @@
         font-size: 0.72em;
         opacity: 0.7;
     }
+
     .sort-header :global(button:not(:last-child)) {
         border-right: 1px solid var(--primary-lighter) !important;
     }
+
     .sort-header :global(button.isActive) {
         background-color: var(--primary-darkest) !important;
         border-bottom: 0 !important;
