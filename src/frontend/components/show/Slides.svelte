@@ -485,7 +485,7 @@
                         {/if}
                     </Center>
                 {:else}
-                    <div class="grid" style="--slide-gap: 18px;{$focusMode ? '' : 'padding-bottom: 60px;'}">
+                    <div class="grid" style="--slide-gap: 18px; --columns: {gridMode ? $slidesOptions.columns : 1};{$focusMode ? '' : 'padding-bottom: 60px;'}">
                         {#if layoutSlides.length}
                             {#each layoutSlides as slide, i}
                                 {@const currentSlide = currentShow?.slides?.[slide.id]}
@@ -515,10 +515,14 @@
 
 <style>
     .grid {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(var(--columns, 1), minmax(0, 1fr));
         gap: var(--slide-gap, 18px);
         padding: 18px 18px 60px;
         align-items: flex-start;
+    }
+
+    .grid > :global(.main) {
+        width: 100% !important;
     }
 </style>
