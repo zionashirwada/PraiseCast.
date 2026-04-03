@@ -481,9 +481,12 @@
                 {/if}
             {/if}
 
-            <MaterialButton title="show.text [Ctrl+Shift+T]" on:click={() => textEditActive.set(true)}>
-                <Icon id="text_edit" white />
-                <!-- {#if open && !$labelsDisabled}<p><T id="show.text" /></p>{/if} -->
+            <MaterialButton
+                title={$textEditActive ? "Back to View [Ctrl+Shift+T]" : "Text Editor [Ctrl+Shift+T]"}
+                on:click={() => textEditActive.set(!$textEditActive)}
+            >
+                <Icon id={$textEditActive ? "eye" : "text_edit"} white />
+                <span>{$textEditActive ? "View" : "Text Edit"}</span>
             </MaterialButton>
         </FloatingInputs>
 

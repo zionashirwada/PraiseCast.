@@ -144,7 +144,7 @@ export function updateSettings(data: any) {
     let currentTheme = get(themes)[data.theme]
     if (currentTheme?.colors) {
         // update colors (pre 0.9.2 or 1.4.9)
-        const pre092 = currentTheme.colors.secondary?.toLowerCase() === "#e6349c"
+        const pre092 = ["#e6349c", "#f0008c"].includes(currentTheme.colors.secondary?.toLowerCase() || "")
         const pre149 = currentTheme.colors.primary?.toLowerCase() === "#292c36"
         if (data.theme === "default" && (pre092 || pre149)) {
             themes.update((a) => {

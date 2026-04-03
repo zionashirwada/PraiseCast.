@@ -177,7 +177,7 @@
 
 <div class="grid">
     {#each { length: pageCount } as _page, i}
-        <div id={"id_" + getId(path) + "_" + i} class="main" class:active={active === i} style="{output?.color ? 'outline: 2px solid ' + output.color + ';' : ''}width: {100 / (pageCount > 1 ? $slidesOptions.columns : 1)}%;">
+        <div id={"id_" + getId(path) + "_" + i} class="main" class:active={active === i} style="outline: 2px solid var(--secondary);width: {100 / (pageCount > 1 ? $slidesOptions.columns : 1)}%;">
             <!-- icons -->
             <div class="icons">
                 {#if timer}

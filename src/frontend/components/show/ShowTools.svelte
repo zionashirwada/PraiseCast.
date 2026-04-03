@@ -4,15 +4,11 @@
     import { _show } from "../helpers/shows"
     import Tabs from "../main/Tabs.svelte"
     import Media from "./tools/Media.svelte"
-    import Metadata from "./tools/Metadata.svelte"
-    import SlideGroups from "./tools/SlideGroups.svelte"
 
     const tabs: TabsObj = {
-        groups: { name: "tools.groups", icon: "groups" },
-        metadata: { name: "tools.metadata", icon: "info" },
         media: { name: "tools.media", icon: "media", remove: true }
     }
-    let active: string = Object.keys(tabs)[0]
+    let active: string = "media"
 
     $: showId = $activeShow?.id
     $: currentShow = $showsCache[showId || ""]
@@ -47,15 +43,9 @@
         <Tabs {tabs} bind:active />
 
         {#if currentShow}
-            {#if active === "groups"}
-                <SlideGroups />
-            {:else if active === "media"}
+            {#if active === "media"}
                 <div class="content">
                     <Media />
-                </div>
-            {:else if active === "metadata"}
-                <div class="content">
-                    <Metadata />
                 </div>
             {/if}
         {/if}

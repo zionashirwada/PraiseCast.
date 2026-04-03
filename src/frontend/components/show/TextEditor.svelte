@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Show } from "../../../types/Show"
+    import { convertSiFontToUnicode, convertSinglishToUnicode, convertTaFontToUnicode, convertTanglishToUnicode } from "../../converters/textTransliteration"
     import { getQuickExample } from "../../converters/txt"
     import { activePopup, textEditActive, textEditZoom } from "../../stores"
     import { transposeText } from "../../utils/chordTranspose"
@@ -35,6 +36,14 @@
         formatText(transposeText(text, -1))
     }
 
+    function applyConversion(converter: (value: string) => string) {
+        const converted = converter(text)
+        if (converted === text) return
+
+        text = converted
+        formatText(converted)
+    }
+
     $: showHasChords = Object.values(currentShow?.slides || {}).find((a) => a.items?.find((a) => a.lines?.find((a) => a.chords)))
 </script>
 
@@ -50,6 +59,13 @@
     <MaterialButton isActive title="show.text" on:click={() => textEditActive.set(false)}>
         <Icon id="text_edit" white />
     </MaterialButton>
+</FloatingInputs>
+
+<FloatingInputs side="center" bottom={58} style="width: min(96vw, 940px); gap: 4px;">
+    <MaterialButton disabled={isLocked} on:click={() => applyConversion(convertSiFontToUnicode)} title="Sinhala Font to Unicode" style="flex: 1;min-width: 0;padding: 0 0.45rem !important;font-size: 0.68em;line-height: 1;white-space: nowrap;justify-content: center;text-align: center;">Sinhala Font to Unicode</MaterialButton>
+    <MaterialButton disabled={isLocked} on:click={() => applyConversion(convertTaFontToUnicode)} title="Tamil Font to Unicode" style="flex: 1;min-width: 0;padding: 0 0.45rem !important;font-size: 0.68em;line-height: 1;white-space: nowrap;justify-content: center;text-align: center;">Tamil Font to Unicode</MaterialButton>
+    <MaterialButton disabled={isLocked} on:click={() => applyConversion(convertSinglishToUnicode)} title="Singlish to Unicode" style="flex: 1;min-width: 0;padding: 0 0.45rem !important;font-size: 0.68em;line-height: 1;white-space: nowrap;justify-content: center;text-align: center;">Singlish to Unicode</MaterialButton>
+    <MaterialButton disabled={isLocked} on:click={() => applyConversion(convertTanglishToUnicode)} title="Tanglish to Unicode" style="flex: 1;min-width: 0;padding: 0 0.45rem !important;font-size: 0.68em;line-height: 1;white-space: nowrap;justify-content: center;text-align: center;">Tanglish to Unicode</MaterialButton>
 </FloatingInputs>
 
 {#if showHasChords}
