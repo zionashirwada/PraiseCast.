@@ -1,0 +1,3 @@
+C:\Windows\System32>cd /d "D:\My Projects\doro\PraiseCast"
+
+D:\My Projects\doro\PraiseCast>npx electron-builder -w --config config/building/electron-builder.yaml --publish never

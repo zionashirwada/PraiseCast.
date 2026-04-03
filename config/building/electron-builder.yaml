@@ -1,6 +1,6 @@
-appId: app.freeshow
-productName: FreeShow
-artifactName: FreeShow-${version}-${arch}.${ext}
+appId: app.praisecast
+productName: PraiseCast
+artifactName: PraiseCast-${version}-${arch}.${ext}
 
 # WIDEVINE
 # Use castlabs electron builds to get widevine support
@@ -23,14 +23,9 @@ extraResources:
 
 win:
     target: NSIS
-    icon: build/public/icon.png
+    icon: public/icon.ico
     asarUnpack:
         - "**/node_modules/macadam/**/*.node"
-    azureSignOptions:
-        publisherName: Live Church Solutions
-        endpoint: https://wus2.codesigning.azure.net/
-        certificateProfileName: FreeShow
-        codeSigningAccountName: FreeShow
 
 # linux
 
@@ -44,7 +39,7 @@ linux:
         - AppImage
         - deb
         - rpm
-    icon: build/public
+    icon: public
 
 deb:
     depends:
@@ -55,7 +50,7 @@ deb:
 # macos
 
 mac:
-    icon: build/public/icon.png
+    icon: public/icon.icns
     asarUnpack:
         - "**/node_modules/macadam/**/*.node"
     target:
@@ -82,7 +77,7 @@ mac:
 afterSign: scripts/macos/notarize.js
 
 dmg:
-    background: build/public/dmg.png
+    background: public/dmg.png
     sign: false
     contents:
         - x: 140

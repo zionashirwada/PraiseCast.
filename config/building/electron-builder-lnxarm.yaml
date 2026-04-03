@@ -1,6 +1,6 @@
-appId: app.freeshow
-productName: FreeShow
-artifactName: FreeShow-${version}-${arch}.${ext}
+appId: app.praisecast
+productName: PraiseCast
+artifactName: PraiseCast-${version}-${arch}.${ext}
 
 files:
     - build/electron/**
@@ -26,7 +26,7 @@ linux:
         - AppImage
         - deb
         - rpm
-    icon: build/public
+    icon: public
 
 deb:
     depends:
