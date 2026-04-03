@@ -513,7 +513,7 @@
         "effect_items": "Item efek",
         "timeline": "Timeline",
         "timecode": "Kode waktu",
-        "initialize": "Selamat datang di FreeShow",
+        "initialize": "Selamat datang di Praisecast",
         "unsaved": "Apakah anda yakin ingin keluar?",
         "cancel": "Batal",
         "continue": "Lanjutkan",
@@ -1675,3 +1675,4 @@
         "translation_description_layouts": "Membuat serangkaian slide dan layout yang unik untuk setiap bahasa."
     }
 }
+

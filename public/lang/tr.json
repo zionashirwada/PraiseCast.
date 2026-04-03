@@ -58,7 +58,7 @@
         "libraries": "Kullanılan kütüphaneler",
         "thanks": "Teşekkür ederim",
         "new_update": "Yeni güncelleme mevcut",
-        "download": "Güncellemek için uygulamayı yeniden başlatın veya manuel olarak indirmek için freeshow.app adresine gidin",
+        "download": "Güncellemek için uygulamayı yeniden başlatın veya manuel olarak indirmek için Praisecast.app adresine gidin",
         "changes": "Neler yeni"
     },
     "tooltip": {
@@ -508,7 +508,7 @@
         "effect_items": "Efekt öğeleri",
         "timeline": "Zaman çizelgesi",
         "timecode": "Zaman kodu",
-        "initialize": "FreeShow'a Hoşgeldiniz",
+        "initialize": "Praisecast'a Hoşgeldiniz",
         "unsaved": "Bırakmak istediğine emin misin?",
         "cancel": "İptal",
         "continue": "Devam et",
@@ -1656,3 +1656,4 @@
         "translation_description_layouts": "Her dil için benzersiz bir slayt seti ve bir düzen oluşturur."
     }
 }
+

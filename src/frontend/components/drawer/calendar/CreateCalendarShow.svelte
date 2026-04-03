@@ -71,7 +71,7 @@
         </Button>
     </div>
 
-    <Button on:click={createShow} disabled={!currentEvents.length} dark center>
+    <Button on:click={createShow} disabled={!currentEvents.length} dark center red style="width: 100%; justify-content: space-between; padding: 0.7rem 1rem; border-radius: 10px; background: linear-gradient(90deg, #450a0a 0%, #b91c1c 55%, #ef4444 100%); color: white;">
         <Icon id="slide" right />
         <T id="new.show_convert" />
         {#if currentEvents.length > 1}

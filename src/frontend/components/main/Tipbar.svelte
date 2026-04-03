@@ -10,9 +10,9 @@
     const ONE_DAY = 1000 * 60 * 60 * 24
 
     const messages = {
-        donate: "FreeShow is free because of the generous gifts of our users. Would you consider donating to FreeShow? With your help we can continue to meet the tech needs of the Church."
-        // welcome: "Welcome to FreeShow! We're glad to have you here. Explore the features and let us know if you need any help getting started.",
-        // update: "FreeShow has been updated to the latest version! Check out the new features and improvements we've made for a better experience."
+        donate: "Praisecast is free because of the generous gifts of our users. Would you consider donating to Praisecast? With your help we can continue to meet the tech needs of the Church."
+        // welcome: "Welcome to Praisecast! We're glad to have you here. Explore the features and let us know if you need any help getting started.",
+        // update: "Praisecast has been updated to the latest version! Check out the new features and improvements we've made for a better experience."
     }
 
     let activeMessage = "donate"
@@ -61,7 +61,7 @@
             {message}
 
             {#if activeMessage === "donate"}
-                <MaterialButton style="margin-left: 10px;padding: 2px 10px;background: linear-gradient(160deg, #f0008c 0%, #d100db 10%, #b300f0 30%, #9000f0 50%, #8000f0 100%) !important;" on:click={donate}>
+                <MaterialButton style="margin-left: 10px;padding: 2px 10px;background: linear-gradient(160deg, #e11d48 0%, #f97316 10%, #ef4444 30%, #dc2626 50%, #991b1b 100%) !important;" on:click={donate}>
                     <span style="font-weight: bold;color: white;">Donate</span>
                     <Icon id="launch" white />
                 </MaterialButton>
@@ -88,7 +88,7 @@
 
         /* border-top: 1px solid; */
         border-bottom: 2px solid;
-        border-image: linear-gradient(160deg, #8000f0 0%, #9000f0 10%, #b300f0 30%, #d100db 50%, #f0008c 100%) 1;
+        border-image: linear-gradient(160deg, #991b1b 0%, #dc2626 10%, #ef4444 30%, #f97316 50%, #e11d48 100%) 1;
     }
 
     .text {

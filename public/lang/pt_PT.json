@@ -58,7 +58,7 @@
         "libraries": "Bibliotecas utilizadas",
         "thanks": "Agradecimentos",
         "new_update": "Nova atualização disponível",
-        "download": "Reinicie a aplicação para atualizar ou vá a freeshow.app para baixar manualmente",
+        "download": "Reinicie a aplicação para atualizar ou vá a Praisecast.app para baixar manualmente",
         "changes": "Novidades"
     },
     "tooltip": {
@@ -481,7 +481,7 @@
         "manage_tags": "Gerir etiquetas",
         "sync_categories": "Selecione categorias para sincronizar",
         "effect_items": "Efeitos",
-        "initialize": "Bem-Vindo ao FreeShow",
+        "initialize": "Bem-Vindo ao Praisecast",
         "unsaved": "Tem certeza que deseja sair?",
         "cancel": "Cancelar",
         "continue": "Continuar",
@@ -1588,3 +1588,4 @@
         "translation_description_layouts": "Cria um conjunto único de slides e um layout para cada idioma."
     }
 }
+

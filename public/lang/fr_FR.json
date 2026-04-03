@@ -513,7 +513,7 @@
         "effect_items": "Éléments d'effet",
         "timeline": "Chronologie",
         "timecode": "Code temporel",
-        "initialize": "Bienvenue sur FreeShow",
+        "initialize": "Bienvenue sur Praisecast",
         "unsaved": "Vous n'avez pas encore sauvergardé ! Êtes-vous sur de vouloir quitter ?",
         "cancel": "Annuler",
         "continue": "Continuer",
@@ -1675,3 +1675,4 @@
         "translation_description_layouts": "Crée un ensemble unique de diapos et une mise en page pour chaque langue."
     }
 }
+

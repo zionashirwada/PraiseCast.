@@ -513,7 +513,7 @@
         "effect_items": "Efeitos",
         "timeline": "Linha do tempo",
         "timecode": "Timecode",
-        "initialize": "Seja bem-vindo ao FreeShow",
+        "initialize": "Seja bem-vindo ao Praisecast",
         "unsaved": "Tem certeza que deseja sair?",
         "cancel": "Cancelar",
         "continue": "Continuar",
@@ -1675,3 +1675,4 @@
         "translation_description_layouts": "Cria um conjunto único de slides e um layout para cada idioma."
     }
 }
+

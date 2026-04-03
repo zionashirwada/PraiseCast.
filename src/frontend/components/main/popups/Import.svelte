@@ -16,9 +16,9 @@
     popupData.set({})
 
     const freeshow_formats = [
-        { name: "formats.show", title: "FreeShow Song/Presentation File", icon: "slide", extensions: ["show", "json"], id: "freeshow" },
-        { name: "formats.project", title: "FreeShow Project File", icon: "project", extensions: ["project", "shows", "json", "zip"], id: "freeshow_project" }, // , "fsproject", "fsp"
-        { name: "formats.template", title: "FreeShow Template File", icon: "templates", extensions: ["fstemplate", "fst", "template", "json", "zip"], id: "freeshow_template" }
+        { name: "formats.show", title: "Praisecast Song/Presentation File", icon: "slide", extensions: ["show", "json"], id: "freeshow" },
+        { name: "formats.project", title: "Praisecast Project File", icon: "project", extensions: ["project", "shows", "json", "zip"], id: "freeshow_project" }, // , "fsproject", "fsp"
+        { name: "formats.template", title: "Praisecast Template File", icon: "templates", extensions: ["fstemplate", "fst", "template", "json", "zip"], id: "freeshow_template" }
         // { name: "formats.theme", extensions: ["fstheme", "theme", "json"], id: "freeshow_theme" } // moved to settings
         // { name: "Calendar", extensions: ["ics"], id: "calendar" }, // calendar drawer tab
         // { name: "Scripture", id: "scripture" }, // scripture drawer tab
@@ -194,7 +194,7 @@
                 <p>{translateText(format.name)}</p>
 
                 <div class="freeshow">
-                    <img style="height: 18px;padding: 0;" src="./import-logos/freeshow.webp" alt="FreeShow-logo" draggable={false} />
+                <img style="height: 18px;padding: 0;" src="./import-logos/freeshow.webp" alt="Praisecast logo" draggable={false} />
                 </div>
             </MaterialButton>
         {/each}

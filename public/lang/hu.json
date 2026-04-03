@@ -513,7 +513,7 @@
         "effect_items": "Effektus elemek",
         "timeline": "Idővonal",
         "timecode": "Időjel",
-        "initialize": "Üdvözöljük a FreeShow-ban",
+        "initialize": "Üdvözöljük a Praisecast-ban",
         "unsaved": "Biztosan ki szeretne léptni?",
         "cancel": "Mégsem",
         "continue": "Folytatás",
@@ -1675,3 +1675,4 @@
         "translation_description_layouts": "Minden nyelvhez egyedi diakészletet és elrendezést hoz létre."
     }
 }
+

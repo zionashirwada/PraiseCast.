@@ -37,7 +37,7 @@
 {/if}
 
 {#if create}
-    <MaterialButton variant="contained" style="margin-top: 20px;" icon="add" on:click={createShow}>
+    <MaterialButton variant="contained" gradient red style="margin-top: 20px; width: 100%; justify-content: space-between; padding: 0.7rem 1rem; border-radius: 10px; background: linear-gradient(90deg, #450a0a 0%, #b91c1c 55%, #ef4444 100%); color: white;" icon="add" on:click={createShow}>
         <T id="new.show_convert" />
     </MaterialButton>
 {/if}

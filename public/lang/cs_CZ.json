@@ -3,7 +3,7 @@
         "welcome": "Vítejte",
         "quit": "Odejít",
         "docs": "Dokumentace",
-        "about": "O Freeshow",
+        "about": "O Praisecast",
         "unnamed": "Nezařazené",
         "drop": "Pusťte zde",
         "search": "Vyhledat",
@@ -513,8 +513,8 @@
         "effect_items": "Efektové předměty",
         "timeline": "Časová osa",
         "timecode": "TImecode",
-        "initialize": "Vítejte ve FreeShow",
-        "unsaved": "Opustit FreeShow?",
+        "initialize": "Vítejte ve Praisecast",
+        "unsaved": "Opustit Praisecast?",
         "cancel": "Storno",
         "continue": "Pokračovat",
         "restore": "Obnovit zálohu",
@@ -1675,3 +1675,4 @@
         "translation_description_layouts": "Vytvoří jedinečnou sadu snímků a rozvržení pro každý jazyk."
     }
 }
+

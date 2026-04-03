@@ -348,7 +348,7 @@
 
 {#if useOldSystem}
     <InputRow>
-        <Button on:click={createScriptureShow} style="width: 100%;" disabled={!selectedVerses.length} dark center>
+        <Button on:click={createScriptureShow} style="width: 100%; justify-content: space-between; padding: 0.7rem 1rem; border-radius: 10px; background: linear-gradient(90deg, #450a0a 0%, #b91c1c 55%, #ef4444 100%); color: white;" disabled={!selectedVerses.length} dark center red>
             <Icon id="slide" right />
             <T id="new.show_convert" />
             <!-- {#if slides.length > 1}
@@ -371,7 +371,7 @@
     </InputRow>
 {:else}
     <FloatingInputs onlyOne>
-        <MaterialButton icon="slide" title="new.show_convert [Ctrl+N]" on:click={() => createScriptureShow()}>
+        <MaterialButton icon="slide" title="new.show_convert [Ctrl+N]" on:click={() => createScriptureShow()} variant="contained" gradient red style="width: 100%; justify-content: space-between; padding: 0.7rem 1rem; border-radius: 10px; background: linear-gradient(90deg, #450a0a 0%, #b91c1c 55%, #ef4444 100%); color: white;">
             <T id="new.show_convert" />
         </MaterialButton>
     </FloatingInputs>

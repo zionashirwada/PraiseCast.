@@ -513,7 +513,7 @@
         "effect_items": "Elementos de efecto",
         "timeline": "Cronología",
         "timecode": "Código de tiempo",
-        "initialize": "Bienvenido a FreeShow",
+        "initialize": "Bienvenido a Praisecast",
         "unsaved": "¿Seguro que desea salir?",
         "cancel": "Cancelar",
         "continue": "Continuar",
@@ -1675,3 +1675,4 @@
         "translation_description_layouts": "Crear un conjunto único de diapositivas y un diseño para cada idioma."
     }
 }
+

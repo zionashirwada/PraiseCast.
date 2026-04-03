@@ -14,8 +14,8 @@
 <div class="auth-page">
     <div class="panel">
         <div class="brand">
-            <img class="logo" src="./import-logos/freeshow.webp" alt="FreeShow logo" draggable="false" />
-            <h1>RemoteShow</h1>
+            <img class="logo" src="./import-logos/freeshow.webp" alt="Praisecast logo" draggable="false" />
+            <h1>Praisecast Remote</h1>
         </div>
 
         <form on:submit|preventDefault={submit} class="auth-form">

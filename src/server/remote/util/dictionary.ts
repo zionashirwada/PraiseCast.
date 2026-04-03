@@ -5,9 +5,9 @@ export const DEFAULT_DICTIONARY = {
     },
     empty: {
         general: "Nothing here",
-        project_select: "Select a project",
-        show: "No show selected",
-        shows: "No shows",
+        project_select: "Select a service",
+        show: "No item selected",
+        shows: "No items",
         slides: "No slides",
         search: "No match",
         backgrounds: "No backgrounds in show",
@@ -17,11 +17,11 @@ export const DEFAULT_DICTIONARY = {
         timers: "No timers"
     },
     new: {
-        show: "New show",
-        project: "New project"
+        show: "New item",
+        project: "New service"
     },
     tabs: {
-        shows: "Shows",
+        shows: "Items",
         media: "Media",
         overlays: "Overlays",
         audio: "Audio",
@@ -93,10 +93,10 @@ export const DEFAULT_DICTIONARY = {
         groups: "Groups"
     },
     remote: {
-        projects: "Projects",
-        project: "Project",
-        shows: "Shows",
-        show: "Show",
+        projects: "Services",
+        project: "Service",
+        shows: "Items",
+        show: "Item",
         slide: "Slide",
         lyrics: "Lyrics",
         end: "End",
@@ -116,7 +116,7 @@ export const DEFAULT_DICTIONARY = {
         play: "Play"
     },
     context: {
-        addToProject: "Add to project"
+        addToProject: "Add to service"
     },
     audio: {
         main: "Main",

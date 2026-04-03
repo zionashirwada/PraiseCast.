@@ -195,7 +195,7 @@
     }
 
     .progress-fill.media {
-        background: linear-gradient(90deg, #8000f0 0%, var(--secondary) 100%);
+            background: linear-gradient(90deg, #7c3aed 0%, var(--secondary) 100%);
     }
 
     .progress-fill.pdf {

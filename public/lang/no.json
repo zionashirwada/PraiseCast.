@@ -513,7 +513,7 @@
         "effect_items": "Effekt elementer",
         "timeline": "Tidslinje",
         "timecode": "Tidskode",
-        "initialize": "Velkommen til FreeShow",
+        "initialize": "Velkommen til Praisecast",
         "unsaved": "Er du sikkert på at du vil avslutte?",
         "cancel": "Avbryt",
         "continue": "Fortsett",
@@ -1675,3 +1675,4 @@
         "translation_description_layouts": "Oppretter et unikt sett med lysbilder og et oppsett for hvert språk."
     }
 }
+

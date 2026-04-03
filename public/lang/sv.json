@@ -58,7 +58,7 @@
         "libraries": "Använda bibliotek",
         "thanks": "Tack till",
         "new_update": "Ny uppdatering tillgänglig",
-        "download": "Starta om programmet för att uppdatera eller gå till freeshow.app och ladda ner den manuellt",
+        "download": "Starta om programmet för att uppdatera eller gå till Praisecast.app och ladda ner den manuellt",
         "changes": "Vad är nytt"
     },
     "tooltip": {
@@ -508,7 +508,7 @@
         "effect_items": "effektföremål",
         "timeline": "Timeline",
         "timecode": "Timecode",
-        "initialize": "Välkommen till FreeShow",
+        "initialize": "Välkommen till Praisecast",
         "unsaved": "Är du säker att du vill sluta",
         "cancel": "Ångra",
         "continue": "Fortsätt",
@@ -1656,3 +1656,4 @@
         "translation_description_layouts": "Skapa ett unik sett av bilder och en\nlayout för varje såpråk"
     }
 }
+
