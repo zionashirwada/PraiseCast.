@@ -485,7 +485,7 @@
                         {/if}
                     </Center>
                 {:else}
-                    <div class="grid" style={$focusMode ? "" : "padding-bottom: 60px;"}>
+                    <div class="grid" style="--slide-gap: 18px;{$focusMode ? '' : 'padding-bottom: 60px;'}">
                         {#if layoutSlides.length}
                             {#each layoutSlides as slide, i}
                                 {@const currentSlide = currentShow?.slides?.[slide.id]}
@@ -517,6 +517,8 @@
     .grid {
         display: flex;
         flex-wrap: wrap;
-        padding: 5px;
+        gap: var(--slide-gap, 18px);
+        padding: 18px 18px 60px;
+        align-items: flex-start;
     }
 </style>

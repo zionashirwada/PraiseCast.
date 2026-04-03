@@ -210,7 +210,6 @@
     let profile = getAccess("shows")
     $: isGroupLocked = !!slide?.locked // WIP get group slide
     $: isLocked = show?.locked || isGroupLocked || profile.global === "read" || profile[show?.category || ""] === "read"
-
     // correct view order based on arranged order in Items.svelte (?.reverse())
     $: itemsList = clone(slide.items) || []
 
@@ -255,7 +254,7 @@
     })
 </script>
 
-<div class="main" class:active class:focused style="{output?.color ? 'outline: 2px solid var(--secondary);' : ''}width: {viewMode === 'grid' || viewMode === 'simple' || viewMode === 'groups' || noQuickEdit ? 100 / columns : 100}%;">
+    <div class="main" class:active class:focused class:listView={list} style="width: {list ? 100 : viewMode === 'grid' || viewMode === 'simple' || viewMode === 'groups' || noQuickEdit ? 100 / columns : 100}%; background-color: var(--primary-darkest);">
     <!-- group box -->
     {#if $fullColors}
         <div class="group_box" style="background-color: {color};" />
@@ -269,16 +268,15 @@
     <div class="slide context #{isLocked ? 'default' : $focusMode ? 'slideFocus' : name === null ? 'slideChild' : 'slide'}" class:disabled={layoutSlide.disabled} class:afterEnd={endIndex !== null && index > endIndex} {style} role="none" on:click>
         <div class="hover overlay" />
         <!-- <DropArea id="slide" hoverTimeout={0} file> -->
-        <div style="width: 100%;height: 100%;">
-            <SelectElem style={colorStyle} id="slide" data={{ index, showId }} draggable={!$focusMode && !isLocked} shiftRange={layoutSlides.map((_, index) => ({ index, showId }))} onlyRightClickSelect={$focusMode} selectable={!isLocked} trigger={list ? "column" : "row"}>
+        <SelectElem style="width: 100%;{colorStyle}" id="slide" data={{ index, showId }} draggable={!$focusMode && !isLocked} shiftRange={layoutSlides.map((_, index) => ({ index, showId }))} onlyRightClickSelect={$focusMode} selectable={!isLocked} trigger={list ? "column" : "row"}>
                 <!-- TODO: tab select on enter -->
                 {#if viewMode === "lyrics" && !noQuickEdit}
                     <!-- border-bottom: 1px dashed {color}; -->
                     <div class="label" data-title={removeTagsAndContent(name || "")} style="color: {color};margin-bottom: 5px;">
-                        <span style="color: var(--text);opacity: 0.85;font-size: 0.9em;">{index + 1}</span>
                         <span class="text">{@html name === null || name === "." ? "" : name || "—"}</span>
                     </div>
                 {/if}
+                <div class="preview">
                 <Zoomed
                     background={slide.items?.length && (viewMode !== "lyrics" || noQuickEdit) ? (transparentOutput || $special.transparentSlides ? "var(--primary);" : slide.settings?.color || currentStyle.background || "black") : (viewMode !== "lyrics" || noQuickEdit ? fadeColor(color) : "") || "transparent"}
                     checkered={viewMode !== "lyrics" && slide.items?.length > 0 && (transparentOutput || $special.transparentSlides) && !bg}
@@ -372,6 +370,7 @@
                         {/each}
                     {/if}
                 </Zoomed>
+            </div>
 
                 <!-- {#if viewMode === "grid" && capped}Max limit reached{/if} -->
 
@@ -388,7 +387,7 @@
                     <div data-title={name || ""} style="height: 2px;" />
                 {:else if viewMode !== "lyrics" || noQuickEdit}
                     <!-- style="width: {resolution.width * zoom}px;" -->
-                    <div class="label" data-title={removeTagsAndContent(name || "")} style={$fullColors ? `background-color: ${color};color: ${getContrast(color || "")};` : `border-bottom: 2px solid ${color || "var(--primary-darkest)"};`}>
+                    <div class="label" data-title={removeTagsAndContent(name || "")} style={$fullColors ? `background-color: ${color};color: ${getContrast(color || "")};` : ""}>
                         {#if name === null && $fullColors && $activePage === "show"}
                             <!-- WIP this works fine without full colors, but is it neccesary? (UI vs UX) -->
                             <div class="childLink" style="background-color: {color};" class:full={$fullColors} />
@@ -412,7 +411,6 @@
 
                         <!-- <div class="label" title={name || ""} style="border-bottom: 2px solid {color};"> -->
                         <!-- font-size: 0.8em; -->
-                        <span style="color: {$fullColors ? getContrast(color || '') : 'var(--text)'};opacity: 0.85;font-size: 0.9em;">{index + 1}</span>
                         <span class="text" style={name === null || name === "." ? "opacity: 0;" : ""}>{@html name === null || name === "." ? "-" : name || "—"}</span>
 
                         <!-- group is locked! -->
@@ -428,7 +426,6 @@
                     </div>
                 {/if}
             </SelectElem>
-        </div>
         <!-- </DropArea> -->
     </div>
     {#if viewMode === "list" && !noQuickEdit}
@@ -449,35 +446,35 @@
 
 <style>
     .main {
-        display: flex;
         position: relative;
-        padding: 2px;
-        /* height: fit-content; */
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 0;
+        box-sizing: border-box;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .main.listView {
+        flex-direction: row;
+        gap: 0;
     }
 
     .slide {
-        /* padding: 3px; */
         background-color: var(--primary-darkest);
         z-index: 0;
-        outline-offset: 0;
+        outline: none;
         width: 100%;
-
         position: relative;
         display: flex;
-
-        /* height: fit-content; */
-        /* border: 2px solid var(--primary-lighter); */
-
-        /* border-radius: 4px; */
+        overflow: hidden;
+        border-radius: 16px;
+        transition:
+            box-shadow 0.2s ease,
+            transform 0.2s ease,
+            filter 0.2s ease;
     }
-
-    /* .slide :global(.selectElem#slide) {
-        border-radius: 4px;
-    }
-    .slide :global(.zoomed .slide) {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-    } */
 
     .slide :global(.isSelected) {
         outline: 5px solid var(--text) !important;
@@ -486,15 +483,15 @@
 
     .main.focused {
         outline: 2px solid var(--secondary-opacity);
-        outline-offset: -1px;
+        outline-offset: 0;
+        box-shadow: 0 0 0 2px var(--secondary-opacity), 0 8px 20px rgba(0, 0, 0, 0.18);
         z-index: 2;
     }
     .main.active {
-        /* outline: 3px solid var(--secondary); */
         outline: 2px solid var(--secondary);
-        outline-offset: -1px;
-        /* this z-index causes the button title to show behind! */
-        /* z-index: 2; */
+        outline-offset: 0;
+        box-shadow: 0 0 0 2px var(--secondary), 0 8px 20px rgba(0, 0, 0, 0.24);
+        z-index: 2;
     }
 
     .group_box {
@@ -550,22 +547,25 @@
         position: relative;
         background-color: var(--primary-darkest);
         display: flex;
-        padding: 5px;
-        padding-bottom: 3px;
-        font-size: 0.8em;
-        font-weight: bold;
+        padding: 5px 8px 7px;
+        font-size: 0.9em;
+        font-weight: 500;
         align-items: center;
-        /* opacity: 0.8; */
-
-        /* border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px; */
+        gap: 6px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .label .text {
+        flex: 1;
+        min-width: 0;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 5px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .label .text :global(.group_count) {
